@@ -21,23 +21,28 @@ class Saite():
         self.Dichte = dictDichte[self.Material]*1000                #kg/m³
         
     def Spannkraft(self):
-        F = pi * self.Dichte * (self.Frequenz*self.Durchmesser*self.Länge)**2
+        F = pi * self.Dichte * (self.Frequenz*self.Durchmesser*self.Länge)**2  # [F] = N
+        
         return F
     
-    def dDichte(self):
-        dDichte = pi*(self.Frequenz*self.Durchmesser*self.Länge)**2
+    def dDichte(self, dDichte_erwartet = 0):
+        vDichte = pi*(self.Frequenz*self.Durchmesser*self.Länge)**2            # [dDichte] = N/(kg/m³) 
+        dDichte =vDichte * dDichte_erwartet
         return dDichte
     
-    def dFrequenz(self):
-        dFrequenz = 2*pi*self.Dichte*self.Frequenz*self.Durchmesser**2*self.Länge**2
+    def dFrequenz(self, dFrequenz_erwartet = 5):
+        vFrequenz = 2*pi*self.Dichte*self.Frequenz*self.Durchmesser**2*self.Länge**2    # [dFrequenz] = N/Hz
+        dFrequenz = vFrequenz * dFrequenz_erwartet
         return dFrequenz
     
-    def dDurchmesser(self):
-        dDurchmesser = 2*pi*self.Dichte*self.Frequenz**2*self.Durchmesser*self.Länge**2
+    def dDurchmesser(self, dDurchmesser_erwartet = 0.03):
+        vDurchmesser = 2*pi*self.Dichte*self.Frequenz**2*self.Durchmesser*self.Länge**2 # [dDurchmesser] = N/m
+        dDurchmesser = vDurchmesser * dDurchmesser_erwartet / 1000
         return dDurchmesser
     
-    def dLänge(self):
-        dLänge = 2*pi*self.Dichte*self.Frequenz**2*self.Durchmesser**2*self.Länge
+    def dLänge(self, dLänge_erwartet = 2):
+        vLänge = 2*pi*self.Dichte*self.Frequenz**2*self.Durchmesser**2*self.Länge # [dLänge] = N/m
+        dLänge = vLänge * dLänge_erwartet / 1000
         return dLänge
     
 if __name__ == "__main__":
